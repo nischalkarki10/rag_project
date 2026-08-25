@@ -18,7 +18,7 @@ db = Chroma(
 )
 
 # Search for relevant documents
-query = "what does Nvidia originally focuses on?"
+query = "who founded Spacex?"
 
 retriever = db.as_retriever(search_kwargs={"k": 5})
 
