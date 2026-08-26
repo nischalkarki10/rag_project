@@ -13,5 +13,4 @@ Semantic document retrieval
 Local answer generation using TinyLlama/TinyLlama-1.1B-Chat-v1.0
 Conversational memory using chat history
 Follow-up question rewriting for better document retrieval
-No OpenAI API required
 Runs locally with Hugging Face models

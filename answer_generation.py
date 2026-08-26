@@ -10,19 +10,13 @@ load_dotenv()
 
 persistent_directory = "db/chroma_db"
 
-
-# ==========================================
 # 1. Load Embedding Model
-# ==========================================
 
 embedding_model = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
-
-# ==========================================
 # 2. Load Chroma Database
-# ==========================================
 
 db = Chroma(
     persist_directory=persistent_directory,
@@ -30,17 +24,14 @@ db = Chroma(
     collection_metadata={"hnsw:space": "cosine"}
 )
 
-
-# ==========================================
 # 3. User Query
-# ==========================================
+
 
 query = "How much did Microsoft pay to acquire GitHub?"
 
 
-# ==========================================
 # 4. Retrieve Relevant Documents
-# ==========================================
+
 
 retriever = db.as_retriever(
     search_kwargs={"k": 5}
@@ -57,9 +48,8 @@ for i, doc in enumerate(relevant_docs, 1):
     print(doc.page_content)
 
 
-# ==========================================
 # 5. Create RAG Prompt
-# ==========================================
+
 
 context = "\n\n".join(
     [doc.page_content for doc in relevant_docs]
@@ -84,9 +74,8 @@ Answer:
 """
 
 
-# ==========================================
 # 6. Load Free Local Hugging Face Model
-# ==========================================
+
 
 print("\nLoading language model...")
 
@@ -101,19 +90,15 @@ model = HuggingFacePipeline(
     pipeline=hf_pipeline
 )
 
-
-# ==========================================
 # 7. Generate Answer
-# ==========================================
+
 
 print("Generating answer...")
 
 result = model.invoke(prompt)
 
 
-# ==========================================
 # 8. Display Answer
-# ==========================================
 
 print("\n--- Generated Response ---")
 print(result)
